@@ -1,6 +1,6 @@
-#![deny(missing_docs, unsafe_code, unstable_features)]
+#![deny(missing_docs, unstable_features)]
 #![allow(unused)]
-
+#[cfg(target_arch = "x86_64")]
 use std::arch::x86_64::*;
 use rand::CryptoRng;
 
@@ -64,5 +64,99 @@ impl Aes {
         0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
     ];
 
+    // private functions
+    fn generate_secret_key() -> __m128i {
+        unsafe { _mm_setzero_si128() }
+    }
 
+    fn generate_iv() -> __m128i {
+        unsafe { _mm_setzero_si128() }
+    }
+
+    fn key_expansion() -> RoundKeys {
+        unimplemented!()
+    }
+
+    fn generate_default_state() -> [[u8; 4]; 4] {
+        unimplemented!()
+    }
+
+    // AES functions
+    fn xtime(value: u8) -> u8 {
+        ((value << 1) ^ ((value >> 7 & 1) * 0x1b))
+    }
+
+    fn xor_with_iv (mut self) {
+
+    }
+
+    fn rot_word(mut word: [u8; 4]) {
+
+    }
+
+    fn sub_word(mut word: [u8; 4]) {
+
+    }
+
+    fn multiply(x: u8, y: u8) -> u8 {
+
+    }
+
+    // Add round key to state
+    fn add_round_key(mut self, round: usize) {
+
+    }
+
+    // substitutes bytes based on the current state
+    fn sub_bytes (mut self) {
+
+    }
+
+    // substitutes bytes based on the current state and inverse sbox
+    fn inv_sub_bytes (mut self) {
+
+    }
+
+    // mixes the columns of the state matrix
+    fn mix_columns (mut self) {
+
+    }
+
+    // mixes the columns of the state matrix for decryption
+    fn inv_mix_columns (mut self) {
+
+    }
+
+    fn shift_rows (mut self) {
+
+    }
+
+    fn inv_shift_rows (mut self) {
+
+    }
+
+    fn cipher (mut self) {
+
+    }
+
+    fn inv_cipher (mut self) {
+
+    }
+
+    pub fn new() -> Self {
+        Aes {
+            secret_key: Aes::generate_secret_key(),
+            encrypt_keys: Aes::key_expansion(),
+            decrypt_keys: Aes::key_expansion(),
+            state: Aes::generate_default_state(),
+        }
+    }
+
+    pub fn encrypt(plain_text: Vec<u8>) -> Vec<u8> {
+        unimplemented!()
+    }
+
+    pub fn decrypt(plain_text: Vec<u8>) -> Vec<u8> {
+        unimplemented!()
+    }
 }
